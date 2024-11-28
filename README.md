@@ -1,4 +1,4 @@
-[API 명세서](https://www.notion.so/53adffc2b6574c47a3d46b4488f12cdb?pvs=21)
+## [API 명세서](https://www.notion.so/53adffc2b6574c47a3d46b4488f12cdb?pvs=21)
 
 ## 1. 유저 생성
 
@@ -165,10 +165,12 @@
       }
       ```
 
+***
 
-ERD 설계
+## ERD 설계
 
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/841312d8-b691-488b-828a-50dcb40acbf6/dd4ba8c6-8bcd-4899-9f27-2ace9615ccfe/image.png)
+<img width="688" alt="image" src="https://github.com/user-attachments/assets/d54e407d-e538-4362-83b7-5748fb0386a9">
+
 
 - user 테이블 구조
 
@@ -208,39 +210,41 @@ ERD 설계
     | created_at | 생성일자 | 2024-11-18 16:42:03.000000 |
     | modified_at | 수정일자 | 2024-11-18 16:42:03.000000 |
 
-SQL 생성문
+***
+
+## SQL 생성문
 
 ```sql
 -- User 테이블 생성
 CREATE TABLE user (
-                    id BIGINT AUTO_INCREMENT PRIMARY KEY,
-                    username VARCHAR(255) NOT NULL,
-                    email VARCHAR(255) NOT NULL UNIQUE,
-                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                    modified_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+id BIGINT AUTO_INCREMENT PRIMARY KEY,
+username VARCHAR(255) NOT NULL,
+email VARCHAR(255) NOT NULL UNIQUE,
+created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+modified_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
 -- Currency 테이블 생성
 CREATE TABLE currency (
-                        id BIGINT AUTO_INCREMENT PRIMARY KEY,
-                        exchange_rate DOUBLE NOT NULL,
-                        currency_name VARCHAR(255) NOT NULL,
-                        symbol VARCHAR(10) NOT NULL,
-                        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                        modified_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+id BIGINT AUTO_INCREMENT PRIMARY KEY,
+exchange_rate DOUBLE NOT NULL,
+currency_name VARCHAR(255) NOT NULL,
+symbol VARCHAR(10) NOT NULL,
+created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+modified_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
 -- ExchangeRequest 테이블 생성
 CREATE TABLE exchange_request (
-                                id BIGINT AUTO_INCREMENT PRIMARY KEY,
-                                user_id BIGINT NOT NULL,
-                                to_currency_id BIGINT NOT NULL,
-                                amount_in_krw DOUBLE NOT NULL,
-                                amount_after_exchange DOUBLE,
-                                status ENUM('NORMAL', 'CANCELED') NOT NULL
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                                modified_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-                                FOREIGN KEY (user_id) REFERENCES user(id) ON DELETE CASCADE,
-                                FOREIGN KEY (to_currency_id) REFERENCES currency(id)
+id BIGINT AUTO_INCREMENT PRIMARY KEY,
+user_id BIGINT NOT NULL,
+to_currency_id BIGINT NOT NULL,
+amount_in_krw DOUBLE NOT NULL,
+amount_after_exchange DOUBLE,
+status ENUM('NORMAL', 'CANCELED') NOT NULL
+created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+modified_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+FOREIGN KEY (user_id) REFERENCES user(id) ON DELETE CASCADE,
+FOREIGN KEY (to_currency_id) REFERENCES currency(id)
 );
 ```
