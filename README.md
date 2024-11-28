@@ -13,7 +13,7 @@
           "email": "email1111@email.com"
       }
       ```
-
+ 
   - 응답 body (201 Created)
 
       ```json
