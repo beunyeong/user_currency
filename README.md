@@ -1,3 +1,20 @@
+## 개요
+- 고객(User)과 통화(Currency) 간의 관계를 설정하고, 환전 요청(ExchangeRequest) 데이터를 관리하는 시스템
+
+## 기능 설명
+1. 환전 요청 기능 구현 : 요청 가능 통화(USD)
+2. 데이터 간 연관관계 설정 : 고객(User), 통화(Currency), 환전 요청(ExchangeRequest) 테이블 간 복잡한 연관관계를 관리
+- User와 ExchangeRequest: 1:N 관계
+- Currency와 ExchangeRequest: 1:N 관계
+- User 및 Currency 엔티티는 각각 ExchangeRequest를 양방향으로 참조
+3. 유저 생성 및 환전 요청 CRUD 기능
+- 유저 생성(POST)
+- 환전 요청(POST)
+- 특정 고객 환전 요청 내역 조회(GET)
+- 환전 요청 내역 상태 변경(PUT) : NORMAL -> CANCELED
+- 유저 삭제 (DELETE) : 고객이 삭제될 경우, 해당 고객의 모든 환전 요청 내역도 함께 삭제
+4. 예외 처리
+
 ## [API 명세서](https://www.notion.so/53adffc2b6574c47a3d46b4488f12cdb?pvs=21)
 
 ## 1. 유저 생성
