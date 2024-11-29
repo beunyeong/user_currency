@@ -1,5 +1,6 @@
 package com.user_currency.Entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -29,7 +30,7 @@ public class Currency extends BaseEntity {
 
     // ExchangeRequest(1)와 Currency(N) 간의 관계(1:N) 설정
     @OneToMany(mappedBy = "currency", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonIgnore                   // 순환 참조 해결
+    @JsonManagedReference                  // 부모 관계로 설정
     private List<ExchangeRequest> exchangeRequests = new ArrayList<>();
 
 
